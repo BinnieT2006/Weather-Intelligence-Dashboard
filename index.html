@@ -1,0 +1,731 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#020914">
+  <meta name="description" content="Meteo Intelligence — weather forecasting and climate analytics dashboard.">
+
+  <title>METEO Intelligence | Weather Dashboard</title>
+
+  <!-- Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  >
+
+  <!-- Leaflet interactive map -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+
+  <!-- Dashboard styling -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Load libraries before app.js -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    defer
+  ></script>
+
+  <script src="js/app.js" defer></script>
+</head>
+
+<body>
+
+  <main class="dashboard">
+
+    <!-- LEFT INTRODUCTION -->
+    <aside class="intro-panel">
+
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-earth-americas"></i>
+        </div>
+
+        <div>
+          <h2>METEO</h2>
+          <span>INTELLIGENCE</span>
+        </div>
+      </div>
+
+      <section class="intro-content">
+        <p class="eyebrow">CASE STUDY</p>
+
+        <h1>
+          Built for Predictability.
+          <span>Designed for Operations.</span>
+        </h1>
+
+        <p class="description">
+          Meteo Intelligence is a professional climate analytics
+          platform delivering real-time forecasts, multi-layer
+          visualizations, and AI-powered insights for
+          mission-critical decisions.
+        </p>
+      </section>
+
+      <section class="feature-grid">
+
+        <div class="feature-card">
+          <i class="fa-solid fa-chart-line"></i>
+          <div>
+            <strong>Real-Time Data</strong>
+            <small>Live updates</small>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <i class="fa-solid fa-brain"></i>
+          <div>
+            <strong>AI Intelligence</strong>
+            <small>Smart insights</small>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <i class="fa-solid fa-globe"></i>
+          <div>
+            <strong>Global Coverage</strong>
+            <small>Worldwide data</small>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div>
+            <strong>Enterprise Grade</strong>
+            <small>Secure and reliable</small>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- AI ASSISTANT DEMO -->
+      <section class="assistant-section">
+
+        <h3>
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          AI Climate Intelligence
+        </h3>
+
+        <p>
+          AI-powered insights, summaries, and predictive recommendations.
+        </p>
+
+        <div class="assistant-card">
+
+          <div class="assistant-header">
+            <span>
+              <i class="fa-solid fa-sparkles"></i>
+              AI Assistant
+            </span>
+
+            <i class="fa-solid fa-ellipsis"></i>
+          </div>
+
+          <div class="assistant-message">
+            <h4>Good afternoon!</h4>
+
+            <p>
+              Here's your operational weather summary for today.
+            </p>
+
+            <ul>
+              <li>Monitor current weather conditions.</li>
+              <li>Review forecasts for changing conditions.</li>
+              <li>Check air quality before outdoor activities.</li>
+            </ul>
+          </div>
+
+          <div class="assistant-input">
+            <input
+              type="text"
+              id="aiInput"
+              placeholder="Ask anything about weather..."
+              autocomplete="off"
+              aria-label="Ask the weather assistant"
+            >
+
+            <button id="aiSend" type="button" aria-label="Send message">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- CENTER WEATHER MAP -->
+    <section class="main-panel">
+
+      <div class="section-heading">
+        <i class="fa-solid fa-map"></i>
+
+        <div>
+          <h3>Interactive Weather Map</h3>
+          <p>
+            Dynamic geographic visualization with real-time weather data.
+          </p>
+        </div>
+      </div>
+
+      <div class="map-dashboard">
+
+        <!-- MAP SIDEBAR -->
+        <nav class="map-sidebar" aria-label="Dashboard navigation">
+
+          <div class="mini-brand">
+            <i class="fa-solid fa-earth-americas"></i>
+            METEO
+          </div>
+
+          <a href="#weatherMap" class="active">
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+          </a>
+
+          <a href="#currentConditions">
+            <i class="fa-solid fa-cloud-sun"></i>
+            Live Weather
+          </a>
+
+          <a href="#weatherMap">
+            <i class="fa-solid fa-satellite-dish"></i>
+            Radar
+          </a>
+
+          <a href="#windMetric">
+            <i class="fa-solid fa-wind"></i>
+            Wind
+          </a>
+
+          <a href="#rainMetric">
+            <i class="fa-solid fa-cloud-rain"></i>
+            Rainfall
+          </a>
+
+          <a href="#currentConditions">
+            <i class="fa-solid fa-temperature-half"></i>
+            Temperature
+          </a>
+
+          <a href="#weatherMap">
+            <i class="fa-solid fa-satellite"></i>
+            Satellite
+          </a>
+
+          <a href="#airQuality">
+            <i class="fa-solid fa-smog"></i>
+            Air Quality
+          </a>
+
+          <a href="#alerts">
+            <i class="fa-solid fa-bell"></i>
+            Alerts
+          </a>
+
+          <a href="#analytics">
+            <i class="fa-solid fa-chart-line"></i>
+            Climate Analytics
+          </a>
+
+          <a href="#analytics">
+            <i class="fa-solid fa-file-lines"></i>
+            Reports
+          </a>
+
+          <a href="#assistant">
+            <i class="fa-solid fa-gear"></i>
+            Settings
+          </a>
+
+        </nav>
+
+        <!-- MAP CONTENT -->
+        <div class="map-content">
+
+          <div class="map-toolbar">
+
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+              <input
+                type="search"
+                id="citySearch"
+                placeholder="Search city..."
+                autocomplete="off"
+                aria-label="Search a city"
+              >
+            </div>
+
+            <!-- DEVICE LOCATION BUTTON -->
+            <button
+              class="location-selector"
+              id="locateMe"
+              type="button"
+              title="Use my current location"
+            >
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <span id="currentCity">New Delhi, India</span>
+            </button>
+
+            <button class="ai-button" id="assistantShortcut" type="button">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              AI Assistant
+            </button>
+
+            <div class="live-status">
+              <span class="live-dot"></span>
+              LIVE
+            </div>
+
+          </div>
+
+          <!-- LEAFLET MAP -->
+          <div class="map-area">
+
+            <div
+              id="weatherMap"
+              role="application"
+              aria-label="Interactive map. Click to select a weather location."
+            ></div>
+
+            <!-- VISUAL LAYER CONTROLS -->
+            <div class="layer-panel">
+
+              <h4>LAYERS</h4>
+
+              <label>
+                <input type="checkbox" checked>
+                Wind
+              </label>
+
+              <label>
+                <input type="checkbox" checked>
+                Rainfall
+              </label>
+
+              <label>
+                <input type="checkbox">
+                Temperature
+              </label>
+
+              <label>
+                <input type="checkbox">
+                Clouds
+              </label>
+
+              <label>
+                <input type="checkbox">
+                Pressure
+              </label>
+
+              <label>
+                <input type="checkbox">
+                Satellite
+              </label>
+
+              <label>
+                <input type="checkbox">
+                Lightning
+              </label>
+
+              <label>
+                <input type="checkbox">
+                Air Quality
+              </label>
+
+            </div>
+
+            <!-- WEATHER INFORMATION CARD -->
+            <div class="storm-card">
+
+              <h4>
+                <i class="fa-solid fa-cloud-bolt"></i>
+                Weather Overview
+              </h4>
+
+              <strong id="stormTitle">Weather Conditions</strong>
+
+              <p id="stormDescription">
+                Select a location to inspect weather conditions.
+              </p>
+
+              <button id="viewStorm" type="button">
+                View Details
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- WEATHER METRICS -->
+          <div class="weather-metrics">
+
+            <div class="metric-card" id="windMetric">
+              <span>WIND</span>
+              <strong id="windValue">--</strong>
+              <small>km/h</small>
+            </div>
+
+            <div class="metric-card">
+              <span>GUSTS</span>
+              <strong id="gustValue">--</strong>
+              <small>km/h</small>
+            </div>
+
+            <div class="metric-card" id="rainMetric">
+              <span>RAINFALL</span>
+              <strong id="rainValue">--</strong>
+              <small>mm</small>
+            </div>
+
+            <div class="metric-card">
+              <span>PRESSURE</span>
+              <strong id="pressureValue">--</strong>
+              <small>hPa</small>
+            </div>
+
+            <div class="metric-card">
+              <span>HUMIDITY</span>
+              <strong id="humidityValue">--</strong>
+              <small>%</small>
+            </div>
+
+            <div class="metric-card">
+              <span>UV INDEX</span>
+              <strong id="uvValue">--</strong>
+              <small>Index</small>
+            </div>
+
+            <div class="metric-card">
+              <span>VISIBILITY</span>
+              <strong id="visibilityValue">--</strong>
+              <small>km</small>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RIGHT FORECAST PANEL -->
+    <aside class="forecast-panel">
+
+      <div class="section-heading">
+        <i class="fa-solid fa-chart-pie"></i>
+
+        <div>
+          <h3>Forecast Analytics</h3>
+          <p>
+            Detailed forecasts, trends, and environmental metrics.
+          </p>
+        </div>
+      </div>
+
+      <div class="forecast-container">
+
+        <!-- CURRENT CONDITIONS -->
+        <section class="current-weather" id="currentConditions">
+
+          <h4>CURRENT CONDITIONS</h4>
+
+          <div class="temperature-display">
+            <i class="fa-solid fa-cloud-sun"></i>
+            <strong id="currentTemp">--°</strong>
+          </div>
+
+          <p id="weatherDescription">Loading weather...</p>
+
+          <div class="weather-details">
+
+            <div>
+              <span>Feels like</span>
+              <b id="feelsLike">--°C</b>
+            </div>
+
+            <div>
+              <span>Humidity</span>
+              <b id="currentHumidity">--%</b>
+            </div>
+
+            <div>
+              <span>Wind</span>
+              <b id="currentWind">-- km/h</b>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- HOURLY FORECAST -->
+        <section>
+
+          <h4>HOURLY FORECAST</h4>
+
+          <div class="hourly-list" id="hourlyForecast">
+            <p>Loading hourly forecast...</p>
+          </div>
+
+        </section>
+
+        <!-- TEN-DAY FORECAST -->
+        <section>
+
+          <h4>10-DAY FORECAST</h4>
+
+          <div class="daily-list" id="dailyForecast">
+            <p>Loading daily forecast...</p>
+          </div>
+
+        </section>
+
+        <!-- AIR QUALITY -->
+        <section id="airQuality">
+
+          <h4>AIR QUALITY INDEX</h4>
+
+          <div class="aqi-value">
+            <strong id="aqiValue">--</strong>
+            <span id="aqiStatus">Loading...</span>
+          </div>
+
+          <div class="aqi-chart">
+            <canvas
+              id="aqiChart"
+              aria-label="Air quality forecast chart"
+            ></canvas>
+          </div>
+
+        </section>
+
+        <!-- WEATHER ALERTS -->
+        <section id="alerts">
+
+          <h4>WEATHER INDICATORS</h4>
+
+          <div id="alertList">
+            <p>Loading weather indicators...</p>
+          </div>
+
+          <button id="allAlerts" type="button">
+            View All Indicators
+          </button>
+
+        </section>
+
+      </div>
+
+    </aside>
+
+    <!-- BOTTOM ANALYTICS -->
+    <section class="bottom-analytics" id="analytics">
+
+      <!-- WEATHER LAYERS -->
+      <div class="analytics-section">
+
+        <div class="analytics-heading">
+          <i class="fa-solid fa-layer-group"></i>
+
+          <div>
+            <h3>Interactive Weather Layers</h3>
+            <p>
+              Explore the available map controls.
+            </p>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+
+          <h4>MAP INFORMATION</h4>
+
+          <div class="layer-visual">
+            <i class="fa-solid fa-earth-americas"></i>
+            <p>Interactive geographic map</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TIMELINE -->
+      <div class="analytics-section">
+
+        <div class="analytics-heading">
+          <i class="fa-regular fa-clock"></i>
+
+          <div>
+            <h3>Timeline Playback Controls</h3>
+            <p>
+              Select a forecast hour and inspect its time.
+            </p>
+          </div>
+        </div>
+
+        <div class="analytics-card">
+
+          <div class="timeline-controls">
+
+            <button id="timelineBack" type="button" aria-label="Previous hour">
+              <i class="fa-solid fa-backward-step"></i>
+            </button>
+
+            <button id="timelinePlay" type="button" aria-label="Play timeline">
+              <i class="fa-solid fa-play"></i>
+            </button>
+
+            <button id="timelineNext" type="button" aria-label="Next hour">
+              <i class="fa-solid fa-forward-step"></i>
+            </button>
+
+            <select id="timelineSpeed" aria-label="Timeline speed">
+              <option value="1">1x</option>
+              <option value="2">2x</option>
+              <option value="3">3x</option>
+            </select>
+
+          </div>
+
+          <input
+            type="range"
+            id="timelineRange"
+            min="0"
+            max="24"
+            value="12"
+            aria-label="Select forecast hour"
+          >
+
+          <div class="timeline-labels">
+            <span>00:00</span>
+            <span>06:00</span>
+            <span>12:00</span>
+            <span>18:00</span>
+            <span>24:00</span>
+          </div>
+
+          <div class="legend">
+            <p>Weather data availability</p>
+            <div class="legend-gradient"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- OPERATIONAL ANALYTICS -->
+      <div class="analytics-section">
+
+        <div class="analytics-heading">
+          <i class="fa-solid fa-chart-column"></i>
+
+          <div>
+            <h3>Operational Analytics</h3>
+            <p>
+              Current weather metrics and pressure trends.
+            </p>
+          </div>
+        </div>
+
+        <div class="analytics-card operations-card">
+
+          <div class="operations-stats">
+
+            <div>
+              WIND
+              <strong id="opWind">--</strong>
+            </div>
+
+            <div>
+              PRESSURE
+              <strong id="opPressure">--</strong>
+            </div>
+
+            <div>
+              HUMIDITY
+              <strong id="opHumidity">--</strong>
+            </div>
+
+            <div>
+              VISIBILITY
+              <strong id="opVisibility">--</strong>
+            </div>
+
+          </div>
+
+          <h4 style="margin-top:16px;">PRESSURE TREND</h4>
+
+          <canvas
+            id="pressureChart"
+            aria-label="Atmospheric pressure trend"
+          ></canvas>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FOOTER STATISTICS -->
+    <footer class="stats-footer">
+
+      <div>
+        <i class="fa-solid fa-database"></i>
+        <strong>200+</strong>
+        <span>Data Sources</span>
+      </div>
+
+      <div>
+        <i class="fa-solid fa-globe"></i>
+        <strong>Global</strong>
+        <span>Worldwide Coverage</span>
+      </div>
+
+      <div>
+        <i class="fa-solid fa-diagram-project"></i>
+        <strong>Forecast</strong>
+        <span>Weather Predictions</span>
+      </div>
+
+      <div>
+        <i class="fa-solid fa-shield-halved"></i>
+        <strong>Live</strong>
+        <span>Weather Monitoring</span>
+      </div>
+
+      <div>
+        <i class="fa-solid fa-brain"></i>
+        <strong>AI Demo</strong>
+        <span>Assistant Preview</span>
+      </div>
+
+    </footer>
+
+  </main>
+
+  <script>
+    // Scroll to the assistant when its shortcut is clicked.
+    document.addEventListener("DOMContentLoaded", () => {
+      const shortcut = document.querySelector("#assistantShortcut");
+      const assistant = document.querySelector(".assistant-section");
+
+      if (shortcut && assistant) {
+        shortcut.addEventListener("click", () => {
+          assistant.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+
+          document.querySelector("#aiInput")?.focus();
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
